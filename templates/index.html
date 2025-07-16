@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vietnamese Sign Language Translator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            min-height: 500px;
+        }
+        .input-panel {
+            border-right: 2px solid #eee;
+            padding-right: 20px;
+        }
+        .output-panel {
+            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        textarea {
+            width: 100%;
+            height: 300px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            resize: vertical;
+        }
+        button {
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .loading {
+            text-align: center;
+            padding: 50px;
+        }
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        video {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .error {
+            color: #dc3545;
+            padding: 20px;
+            background: #f8d7da;
+            border-radius: 6px;
+        }
+        .examples {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+        .example-item {
+            margin: 5px 0;
+            color: #007bff;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .example-item:hover {
+            background: #e9ecef;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤟 Vietnamese Sign Language Translator</h1>
+            <p>Nhập văn bản tiếng Việt để chuyển thành ngôn ngữ ký hiệu</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="input-panel">
+                <h3>📝 Nhập văn bản</h3>
+                <textarea id="textInput" placeholder="Nhập văn bản tiếng Việt của bạn ở đây...&#10;&#10;Ví dụ: Tôi tên là Thành, tôi dạy ở UIT"></textarea>
+                
+                <button id="convertBtn" onclick="convertText()">Chuyển đổi thành video</button>
+                
+                <div class="examples">
+                    <h4>💡 Ví dụ mẫu:</h4>
+                    <div class="example-item" onclick="setExample('Tôi yêu bạn')">Tôi yêu bạn</div>
+                    <div class="example-item" onclick="setExample('Thầy giáo dạy học')">Thầy giáo dạy học</div>
+                    <div class="example-item" onclick="setExample('Tôi tên là Thành')">Tôi tên là Thành</div>
+                    <div class="example-item" onclick="setExample('Chào bạn, tôi học ở UIT')">Chào bạn, tôi học ở UIT</div>
+                </div>
+            </div>
+            
+            <div class="output-panel" id="outputPanel">
+                <h3>🎥 Video ngôn ngữ ký hiệu</h3>
+                <div id="initialMessage">
+                    <p>Nhập văn bản bên trái và nhấn "Chuyển đổi" để xem video</p>
+                    <div style="font-size: 48px; color: #ddd;">🤟</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentTaskId = null;
+        let statusInterval = null;
+
+        function setExample(text) {
+            document.getElementById('textInput').value = text;
+        }
+
+        function convertText() {
+            const text = document.getElementById('textInput').value.trim();
+            
+            if (!text) {
+                alert('Vui lòng nhập văn bản!');
+                return;
+            }
+
+           
+            const btn = document.getElementById('convertBtn');
+            btn.disabled = true;
+            btn.textContent = 'Đang xử lý...';
+
+            
+            showLoading('Đang khởi tạo...');
+
+        
+            fetch('/convert', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: text })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    showError(data.error);
+                    resetButton();
+                } else {
+                    currentTaskId = data.task_id;
+                    checkStatus();
+                }
+            })
+            .catch(error => {
+                showError('Lỗi kết nối: ' + error.message);
+                resetButton();
+            });
+        }
+
+        function checkStatus() {
+            if (!currentTaskId) return;
+
+            statusInterval = setInterval(() => {
+                fetch(`/status/${currentTaskId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'processing') {
+                        showLoading(data.step || 'Đang xử lý...');
+                    } else if (data.status === 'completed') {
+                        clearInterval(statusInterval);
+                        showVideo(data.video);
+                        resetButton();
+                    } else if (data.status === 'error') {
+                        clearInterval(statusInterval);
+                        showError(data.message);
+                        resetButton();
+                    }
+                })
+                .catch(error => {
+                    clearInterval(statusInterval);
+                    showError('Lỗi kiểm tra trạng thái: ' + error.message);
+                    resetButton();
+                });
+            }, 3000); // Check mỗi 3 giây
+        }
+
+        function showLoading(message) {
+            const panel = document.getElementById('outputPanel');
+            panel.innerHTML = `
+                <h3>🎥 Video ngôn ngữ ký hiệu</h3>
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>${message}</p>
+                    <small style="color: #666;">Quá trình này có thể mất 1-3 phút...</small>
+                </div>
+            `;
+        }
+
+    function showVideo(videoPath) {
+        const panel = document.getElementById('outputPanel');
+        
+        
+        const cleanPath = videoPath.startsWith('/') ? videoPath : '/' + videoPath;
+        
+        panel.innerHTML = `
+            <h3>🎥 Video ngôn ngữ ký hiệu</h3>
+            <video controls autoplay loop style="width: 100%; max-width: 500px;">
+                <source src="${cleanPath}" type="video/mp4">
+                <p>Trình duyệt không hỗ trợ video HTML5.</p>
+            </video>
+            <p style="margin-top: 15px; color: #666;">
+                ✅ Video đã sẵn sàng! 
+                <a href="${cleanPath}" download>Tải xuống</a> |
+                <a href="${cleanPath}" target="_blank">Xem trực tiếp</a>
+            </p>
+            <div style="margin-top: 10px; font-size: 12px; color: #999;">
+                Debug path: ${cleanPath}
+            </div>
+        `;
+    }
+        function showError(message) {
+            const panel = document.getElementById('outputPanel');
+            panel.innerHTML = `
+                <h3>🎥 Video ngôn ngữ ký hiệu</h3>
+                <div class="error">
+                    <strong>❌ Lỗi:</strong> ${message}
+                </div>
+            `;
+        }
+
+        function resetButton() {
+            const btn = document.getElementById('convertBtn');
+            btn.disabled = false;
+            btn.textContent = 'Chuyển đổi thành video';
+        }
+    </script>
+</body>
+</html>

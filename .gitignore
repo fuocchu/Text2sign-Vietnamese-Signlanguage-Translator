@@ -1,0 +1,11 @@
+static/poses/
+static/videos/
+assets/vietnamese_lexicon/vsl/
+debug.py
+*.pose
+
+video_gốc/
+*.mp4
+*.avi
+*.mov
+

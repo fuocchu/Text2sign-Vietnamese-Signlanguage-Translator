@@ -1,0 +1,110 @@
+path,spoken_language,signed_language,start,end,words,glosses,priority
+vsl/cho_can.pose,vi,vsl,0,12278945314903342,chó cắn,chó cắn,0
+vsl/anh_ruot.pose,vi,vsl,0,28653653904607097,anh ruột,anh ruột,0
+vsl/ban_yeu_toi.pose,vi,vsl,0,15753753452222024,bạn yêu tôi,bạn yêu tôi,0
+vsl/chet.pose,vi,vsl,0,1245612257064132,chết,chết,0
+vsl/chi.pose,vi,vsl,0,18755421511624255,chị,chị,0
+vsl/cha.pose,vi,vsl,0,1140473833736576,cha,cha,0
+vsl/chay_run.pose,vi,vsl,0,1451718396734874,chạy,chạy(run),0
+vsl/an_uong.pose,vi,vsl,0,17928595162280354,ăn uống,ăn uống,0
+vsl/ai.pose,vi,vsl,0,15896666774262278,ai,ai,0
+vsl/ban.pose,vi,vsl,0,17180180571336818,bạn,bạn,0
+vsl/ai_bao.pose,vi,vsl,0,1582916310026825,ai bảo,ai bảo,0
+vsl/xin_loi.pose,vi,vsl,0,1775408744916909,xin lỗi,xin lỗi,0
+vsl/yeu_weak.pose,vi,vsl,0,1765965945341436,yếu,yếu(weak),0
+vsl/yeu_cau.pose,vi,vsl,0,15592258495938198,yêu cầu,yêu cầu,0
+vsl/yeu_men.pose,vi,vsl,0,16898231191658664,yêu mến,yêu mến,0
+vsl/xay_ra.pose,vi,vsl,0,13725057994661836,xảy ra,xảy ra,0
+vsl/xe_may.pose,vi,vsl,0,13500834106014274,xe máy,xe máy,0
+vsl/truong.pose,vi,vsl,0,14448114753821142,trường,trường,0
+vsl/vo_duyen.pose,vi,vsl,0,14501167577772096,vô duyên,vô duyên,0
+vsl/toi_yeu_ban.pose,vi,vsl,0,17838838864256903,tôi yêu bạn,tôi yêu bạn,0
+vsl/yen_tam.pose,vi,vsl,0,297250581795957,yên tâm,yên tâm,0
+vsl/thay_giao.pose,vi,vsl,0,2073406688380323,thầy giáo,thầy giáo,0
+vsl/viet_nam.pose,vi,vsl,0,1949316006243509,Việt Nam,Việt Nam,0
+vsl/tinh_toan.pose,vi,vsl,0,1897397457583751,tính toán,tính toán,0
+vsl/la_gi.pose,vi,vsl,0,16593259671879532,là gì,là gì,0
+vsl/ngon_ngu_ki_hieu.pose,vi,vsl,0,17305972568520775,ngôn ngữ kí hiệu,ngôn ngữ kí hiệu,0
+vsl/ten_la_gi.pose,vi,vsl,0,14632966069355244,tên là gì,tên là gì,0
+vsl/trung_quoc.pose,vi,vsl,0,16052719174430186,trung quốc,trung quốc,0
+vsl/ten.pose,vi,vsl,0,1735066674719484,tên,tên,0
+vsl/hoi_han.pose,vi,vsl,0,17527527519319237,hối hận,hối hận,0
+vsl/nhung_but.pose,vi,vsl,0,15399399848302868,nhưng,nhưg,0
+vsl/tay_chay.pose,vi,vsl,0,15852519513740122,tẩy chay,tẩy chay,0
+vsl/o_trong.pose,vi,vsl,0,1587754457475473,ô trống,ô trống,0
+vsl/me.pose,vi,vsl,0,1276943613590143,mẹ,mẹ,0
+vsl/o_ngoai.pose,vi,vsl,0,13744411363819786,ở ngoài,ở ngoài,0
+vsl/nau_nuong.pose,vi,vsl,0,1540106780747465,nấu nướng,nấu nướng,0
+vsl/khoe.pose,vi,vsl,0,15696363371794038,sức khỏe,sức khỏe,0
+vsl/suy_nghi.pose,vi,vsl,0,1613213194582114,suy nghĩ,suy nghĩ,0
+vsl/nham_lan.pose,vi,vsl,0,14951618349234097,nhầm lẫn,nhầm lẫn,0
+vsl/nghien_cuu.pose,vi,vsl,0,21621621621621623,nghiên cứu,nghiên cứu,0
+vsl/ghen.pose,vi,vsl,0,12853520125396931,ghen,ghen,0
+vsl/kip_thoi.pose,vi,vsl,0,14596596943181483,kịp thời,kịp thời,0
+vsl/hoc_tap.pose,vi,vsl,0,12109776612828114,học tập,học tập,0
+vsl/em_trai.pose,vi,vsl,0,17163831029889318,em trai,em trai,0
+vsl/khong_co.pose,vi,vsl,0,15993659943278864,không có,không có,0
+vsl/do_an.pose,vi,vsl,0,1743510228052761,đồ ăn,đồ ăn,0
+vsl/hang_ngay.pose,vi,vsl,0,1365165202278505,hằng ngày,hằng ngày,0
+vsl/hoan_ho.pose,vi,vsl,0,11910000166587833,hoan hô,hoan hô,0
+vsl/khoa_hoc.pose,vi,vsl,0,14736069447085098,khoa học,khoa học,0
+vsl/giet.pose,vi,vsl,0,157847845053876,giết,giết,0
+vsl/co.pose,vi,vsl,0,14632298723110968,có không,có không,0
+vsl/em_gai.pose,vi,vsl,0,15386052838056528,em gái,em gái,0
+vsl/dung_khong.pose,vi,vsl,0,12852185453291318,đúng không,đúng không,0
+vsl/di_hoc.pose,vi,vsl,0,16647647757050423,đi học,đi học,0
+vsl/chung_toi.pose,vi,vsl,0,16777444436419937,chúng tôi,chúng tôi,0
+vsl/day_teach.pose,vi,vsl,0,1804938269904866,dạy,dạy,0
+vsl/toi.pose,vi,vsl,0,12012000055750276,tôi,tôi,0
+vsl/7.pose,vi,vsl,0,13202869643797663,7,7,0
+vsl/1.pose,vi,vsl,0,13582582949371507,1,1,0
+vsl/3.pose,vi,vsl,0,13675342087004607,3,3,0
+vsl/2.pose,vi,vsl,0,1364431079016537,2,2,0
+vsl/4.pose,vi,vsl,0,1378044702023226,4,4,0
+vsl/9.pose,vi,vsl,0,1530764093951148,9,9,0
+vsl/8.pose,vi,vsl,0,15975642402619856,8,8,0
+vsl/6.pose,vi,vsl,0,15880881073859487,6,6,0
+vsl/5.pose,vi,vsl,0,1329796428439627,5,5,0
+vsl/10.pose,vi,vsl,0,12569903605231108,10,10,0
+vsl/dau_sac.pose,vi,vsl,0,14191858139232574,dấu sắc,dấu sắc,0
+vsl/dau_nga.pose,vi,vsl,0,17281614755746983,dấu ngã,dấu ngã,0
+vsl/dau_huyen.pose,vi,vsl,0,14715716059611943,dấu huyền,dấu huyền,0
+vsl/dau_nang.pose,vi,vsl,0,13354688434622202,dấu nặng,dấu nặng,0
+vsl/dau_hoi.pose,vi,vsl,0,1518918965558613,dấu hỏi,dấu hỏi,0
+vsl/y.pose,vi,vsl,0,1267183854822641,y,y,0
+vsl/ư.pose,vi,vsl,0,18082249420229488,ư,ư,0
+vsl/v.pose,vi,vsl,0,13708709075137162,v,v,0
+vsl/ă.pose,vi,vsl,0,2070362012445834,ă,ă,0
+vsl/đ.pose,vi,vsl,0,18138138327031141,đ,đ,0
+vsl/â.pose,vi,vsl,0,2192233899596531,â,â,0
+vsl/ơ.pose,vi,vsl,0,18214047352459104,ơ,ơ,0
+vsl/ê.pose,vi,vsl,0,19388555799995595,ê,ê,0
+vsl/t.pose,vi,vsl,0,14334334753454814,t,t,0
+vsl/ô.pose,vi,vsl,0,21709208743695876,ô,ô,0
+vsl/x.pose,vi,vsl,0,1893268247296898,x,x,0
+vsl/r.pose,vi,vsl,0,11840590589128948,r,r,0
+vsl/e.pose,vi,vsl,0,15778695003296246,e,e,0
+vsl/u.pose,vi,vsl,0,1462420765133172,u,u,0
+vsl/o.pose,vi,vsl,0,14685519017625315,o,o,0
+vsl/q.pose,vi,vsl,0,13949366323899208,q,q,0
+vsl/h.pose,vi,vsl,0,1571571630476822,h,h,0
+vsl/l.pose,vi,vsl,0,14661745126913597,l,l,0
+vsl/m.pose,vi,vsl,0,14430263441200983,m,m,0
+vsl/p.pose,vi,vsl,0,17543793953579618,p,p,0
+vsl/s.pose,vi,vsl,0,12775692418006033,s,s,0
+vsl/b.pose,vi,vsl,0,1613488538537808,b,b,0
+vsl/n.pose,vi,vsl,0,17996746200689235,n,n,0
+vsl/c.pose,vi,vsl,0,1558683710868405,c,c,0
+vsl/g.pose,vi,vsl,0,16189523350749127,g,g,0
+vsl/d.pose,vi,vsl,0,15665248510684606,d,d,0
+vsl/i.pose,vi,vsl,0,15070070584089594,i,i,0
+vsl/a.pose,vi,vsl,0,17699366495318196,a,a,0
+vsl/k.pose,vi,vsl,0,14605856188749113,k,k,0
+vsl/nang_luc.pose,vi,vsl,0,1601599972070313,năng lực,năng lực,0
+vsl/on_luyen.pose,vi,vsl,0,2268933266432514,ôn luyện,ôn luyện,0
+vsl/lop_hoc.pose,vi,vsl,0,17017000078979556,lớp học,lớp học,0
+vsl/danh_gia.pose,vi,vsl,0,1601599972070313,đánh giá,đánh giá,0
+vsl/thay_giao.pose,vi,vsl,0,3269933348509797,thầy giáo,thầy giáo,0
+vsl/di_dao.pose,vi,vsl,0,2469133321745875,đi dạo,đi dạo,0
+vsl/xin_chao.pose,vi,vsl,0,14333333333333333,xin chào,xin chào,0
+vsl/tam_biet.pose,vi,vsl,0,14333333333333333,tạm biệt,tạm biệt,0

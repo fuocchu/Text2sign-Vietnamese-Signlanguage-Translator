@@ -1,0 +1,8 @@
+Flask==2.3.3
+pose-format==0.4.0
+google-generativeai>=0.3.0
+numpy>=1.21.0
+opencv-python>=4.5.0
+Pillow>=8.0.0
+matplotlib>=3.5.0
+ffmpeg-python>=0.2.0

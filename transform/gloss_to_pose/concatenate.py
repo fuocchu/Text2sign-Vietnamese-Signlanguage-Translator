@@ -1,0 +1,106 @@
+from typing import List, Tuple
+
+import numpy as np
+from pose_format import Pose
+from pose_format.utils.generic import reduce_holistic, correct_wrists, pose_normalization_info, normalize_pose_size
+
+from spoken_to_signed.gloss_to_pose.smoothing import smooth_concatenate_poses
+
+class ConcatenationSettings:
+    is_reduce_holistic = True
+
+
+def normalize_pose(pose: Pose) -> Pose:
+    return pose.normalize(pose_normalization_info(pose.header))
+
+
+def get_signing_boundary(pose: Pose, wrist_index: int, elbow_index: int) -> Tuple[int, int]:
+    
+
+    pose_length = len(pose.body.data)
+
+    wrist_exists = pose.body.confidence[:, 0, wrist_index] > 0
+    first_non_zero_index = np.argmax(wrist_exists).tolist()
+    last_non_zero_index = pose_length - np.argmax(wrist_exists[::-1])
+
+    wrist_y = pose.body.data[:, 0, wrist_index, 1]
+    elbow_y = pose.body.data[:, 0, elbow_index, 1]
+
+    wrist_above_elbow = wrist_y < elbow_y
+    first_active_frame = np.argmax(wrist_above_elbow).tolist()
+    last_active_frame = pose_length - np.argmax(wrist_above_elbow[::-1])
+
+    return (max(first_non_zero_index, first_active_frame - 5),
+            min(last_non_zero_index, last_active_frame + 5))
+
+def trim_pose(pose, start=True, end=True):
+    if len(pose.body.data) == 0:
+        raise ValueError("Cannot trim an empty pose")
+
+    first_frame = len(pose.body.data)
+    last_frame = 0
+
+    hands = ["LEFT", "RIGHT"]
+    for hand in hands:
+        wrist_index = pose.header._get_point_index(f"POSE_LANDMARKS", f"{hand}_WRIST")
+        elbow_index = pose.header._get_point_index(f"POSE_LANDMARKS", f"{hand}_ELBOW")
+        boundary_start, boundary_end = get_signing_boundary(pose, wrist_index, elbow_index)
+        first_frame = min(first_frame, boundary_start)
+        last_frame = max(last_frame, boundary_end)
+
+    if not start:
+        first_frame = 0
+    if not end:
+        last_frame = len(pose.body.data)
+
+    pose.body.data = pose.body.data[first_frame:last_frame]
+    pose.body.confidence = pose.body.confidence[first_frame:last_frame]
+    return pose
+
+def concatenate_poses(poses: List[Pose], trim=True) -> Pose:
+    valid_poses = [p for p in poses if len(p.body.data) > 0]
+    if not valid_poses:
+        raise ValueError("No valid poses to concatenate")
+    
+    print('Normalizing poses...')
+    valid_poses = [normalize_pose(p) for p in valid_poses]
+
+    if trim:
+        print('Trimming poses...')
+        valid_poses = [trim_pose(p, i > 0, i < len(valid_poses) - 1) for i, p in enumerate(valid_poses)]
+
+    print('Smooth concatenating poses...')
+    pose = smooth_concatenate_poses(valid_poses)
+
+    print('Scaling pose...')
+    normalize_pose_size(pose)
+
+    return pose
+
+
+# def concatenate_poses(poses: List[Pose], trim=True) -> Pose:
+    if ConcatenationSettings.is_reduce_holistic:
+        print('Reducing poses...')
+        poses = [reduce_holistic(p) for p in poses]
+
+    print('Normalizing poses...')
+    poses = [normalize_pose(p) for p in poses]
+
+    # Trim the poses to only include the parts where the hands are visible
+    if trim:
+        print('Trimming poses...')
+        poses = [trim_pose(p, i > 0, i < len(poses) - 1) for i, p in enumerate(poses)]
+
+    # Concatenate all poses
+    print('Smooth concatenating poses...')
+    pose = smooth_concatenate_poses(poses)
+
+    # Correct the wrists (should be after smoothing)
+    print('Correcting wrists...')
+    pose = correct_wrists(pose)
+
+    # Scale the newly created pose
+    print('Scaling pose...')
+    normalize_pose_size(pose)
+
+    return pose
